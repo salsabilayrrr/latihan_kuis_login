@@ -44,6 +44,24 @@ class _HomePageState extends State<HomePage> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
 
+
+
+            // 👈 TAMBAHAN: Tombol Favorite (Ikon Hati) di sebelah kanan (trailing)
+            trailing: IconButton(
+              icon: Icon(
+                food.isFavorite ? Icons.favorite : Icons.favorite_border,
+                color: food.isFavorite ? Colors.red : Colors.grey,
+              ),
+              onPressed: () {
+                setState(() {
+                  // Membalik status isFavorite (True <-> False)
+                  food.isFavorite = !food.isFavorite;
+                });
+              },
+            ),
+
+
+
             //deskripsi, jumlah porsi, dan total harga di bagian bawah nama
             subtitle: Column(
               //-> Isi Bawah: Disusun ke bawah (Vertikal)

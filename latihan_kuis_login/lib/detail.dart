@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'models/food_item.dart';
 
 class DetailPage extends StatefulWidget {
-  final FoodItem foodItem;
+  final FoodItem foodItem;        // Menerima data makanan yang dipilih
   const DetailPage({super.key, required this.foodItem});
 
   @override
@@ -13,6 +13,27 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   // Controller untuk mengatur teks angka di dalam TextField
   late TextEditingController _controller;
+
+
+
+
+
+  //menambah variabel untuk tombol beda warna 
+  // Variabel untuk melacak index tingkat kepedasan (0: Tidak Pedas, 1: Sedang, 2: Super Pedas)
+  int _levelPedasIndex = 0;
+
+  // Daftar warna dan teks keterangan untuk masing-masing tingkat kepedasan
+  final List<Color> _warnaLevel = [Colors.green, Colors.orange, Colors.red];
+  final List<String> _teksLevel = [
+    'Tidak Pedas (Level 0)', 
+    'Pedas Sedang (Level 1)', 
+    'Super Pedas (Level 2)'
+  ];
+
+
+
+
+
 
   @override
   void initState() {
@@ -31,7 +52,27 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.foodItem.name)),
+      appBar: AppBar(
+        title: Text(widget.foodItem.name),
+        backgroundColor: Colors.orange,
+        foregroundColor: Colors.white,
+        actions: [
+          // 👈 Fitur Favorite di pojok kanan atas DetailPage
+          IconButton(
+            icon: Icon(
+              widget.foodItem.isFavorite ? Icons.favorite : Icons.favorite_border,
+              color: widget.foodItem.isFavorite ? Colors.red : Colors.white,
+            ),
+            tooltip: 'Favorit',
+            onPressed: () {
+              setState(() {
+                // Membalik status favorit (True jadi False, False jadi True)
+                widget.foodItem.isFavorite = !widget.foodItem.isFavorite;
+              });
+            },
+          ),
+        ],
+        ),
 
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
@@ -75,6 +116,50 @@ class _DetailPageState extends State<DetailPage> {
             ),
             const Divider(height: 32),
 
+
+
+
+
+
+  //menambah tombol berubah warna
+  // 5. Bagian Pilihan Tingkat Kepedasan (Tombol Interaktif 3 Warna)
+            const Text(
+              'Pilih Tingkat Kepedasan:',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+          SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  // Warna latar belakang tombol berubah otomatis sesuai index aktif
+                  backgroundColor: _warnaLevel[_levelPedasIndex],
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  elevation: 2,
+                ),
+                onPressed: () {
+                  setState(() {
+                    // Berputar dari 0 -> 1 -> 2 -> kembali ke 0 secara berulang
+                    _levelPedasIndex = (_levelPedasIndex + 1) % _warnaLevel.length;
+                  });
+                },
+                child: Text(
+                  '🌶️ Status: ${_teksLevel[_levelPedasIndex]}',
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ),
+          ),
+
+
+
+
+
+
+            const SizedBox(height: 10),
             // 5. Input Jumlah Porsi
             const Text(
               'Jumlah Porsi: ',
@@ -100,6 +185,70 @@ class _DetailPageState extends State<DetailPage> {
               },
             ),
 
+
+
+
+
+
+          //kalo mau button + dan -
+          const SizedBox(height: 12),
+
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.orange, width: 2),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // ← TOMBOL KURANG (-)
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      if (widget.foodItem.quantity > 0) {
+                        widget.foodItem.quantity--;  // ← Kurangi 1
+                      }
+                    });
+                  },
+                  icon: const Icon(Icons.remove_circle),
+                  iconSize: 32,
+                  color: Colors.orange,
+                ),
+                
+                const SizedBox(width: 20),
+
+                // ← TAMPILAN ANGKA
+                Text(
+                  '${widget.foodItem.quantity}',
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                
+                const SizedBox(width: 20),
+
+                // ← TOMBOL TAMBAH (+)
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      widget.foodItem.quantity++;  // ← Tambah 1
+                    });
+                  },
+                  icon: const Icon(Icons.add_circle),
+                  iconSize: 32,
+                  color: Colors.orange,
+                ),
+              ],
+            ),
+          ),
+
+
+
+
+
+
             // 6. Total Harga Dinamis (Ikut berubah saat jumlah porsi diketik)
             const SizedBox(height: 24),
             Row(
@@ -121,7 +270,7 @@ class _DetailPageState extends State<DetailPage> {
             ),
 
             const SizedBox(height: 30),
-            // 7. Tombol Selesai / Kembali
+            // 7. Tombol Selesai 
             SizedBox(
               width: double.infinity,
               height: 50,
