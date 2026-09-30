@@ -19,7 +19,10 @@ class Root extends StatefulWidget {
   State<Root> createState() => _RootState();
 }
 
+//1. Ganti semua yang bertuliskan “MyWidget” dengan Root
 class _RootState extends State<Root> {
+//2. Mendefinisikan penyimpanan setelah classs _RootState
+
   int _selectedIndex = 0;
   final List<FoodItem> foodList = FoodItem.sampleData;
 
@@ -27,6 +30,8 @@ class _RootState extends State<Root> {
   Widget build(BuildContext context) {
     final List<Widget> pages = [
       HomePage(namaUsername: widget.username, foodList: foodList),
+      //foodList itu nama variabel (bisa asal) bisa diganti yang berwarna putih
+      //kalo sampleData itu adalah nama untuk data contoh makanan (dari sananya)
 
 
     //kalo home pake nama bukan username maka  menjadi 
@@ -35,6 +40,10 @@ class _RootState extends State<Root> {
     //   foodList: foodList,
     // ),
 
+
+
+//kalo const ProfilePage berarti = itu bukan berarti ProfilePage adalah variabel. ProfilePage adalah class/widget, sedangkan const memberi tahu Dart bahwa widget tersebut bisa dibuat sebagai objek konstan.
+// Jadi “secara konstan” = nilainya tetap/pasti, bukan berubah-ubah saat aplikasi berjalan.
 
       ProfilePage(
         //tambahan

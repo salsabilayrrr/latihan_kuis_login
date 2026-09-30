@@ -14,6 +14,10 @@ class HomePage extends StatefulWidget {
   final String namaUsername;
 
   final List<FoodItem> foodList;
+  //final List<FoodItem> foodList;
+  //Artinya: Ini adalah variabel penampung data di dalam halaman home. 
+  //Variabel ini bertugas menerima kiriman daftar data makanan (FoodItem) yang dikirimkan dari pusat navigasi (root.dart) agar bisa ditampilkan berderet ke bawah di layar.
+
   const HomePage({
     super.key, 
 
@@ -63,6 +67,12 @@ class _HomePageState extends State<HomePage> {
             itemCount: widget.foodList.length,
             itemBuilder: (context, index) {
               final food = widget.foodList[index];
+              //food yang kecil itu nama variabel yang kamu buat sendiri. 
+              //Jadi bukan nama khusus dari Flutter dan bukan harus food.
+              //bisa dibaca: Ambil satu makanan dari foodList pada posisi index, 
+              //lalu simpan sementara dengan nama food."
+
+
               return Card(
                 // 2. Kotak Kartu: Memberi efek tampilan kartu melayang
                 margin: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -89,9 +99,16 @@ class _HomePageState extends State<HomePage> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
 
+
+
+
                   // 👈 TAMBAHAN: Tombol Favorite (Ikon Hati) di sebelah kanan (trailing)
                   trailing: IconButton(
                     icon: Icon(
+                      
+                    //kalo icon panah ke kanan itu namanya Icon.arrow_forward kalo back ke kiri upward ke atas downward ke bawah
+                    //kalo siku itu Icons.chevron_right
+
                       food.isFavorite ? Icons.favorite : Icons.favorite_border,
                       color: food.isFavorite ? Colors.red : Colors.grey,
                     ),
@@ -102,6 +119,10 @@ class _HomePageState extends State<HomePage> {
                       });
                     },
                   ),
+
+
+
+
 
                   //deskripsi, jumlah porsi, dan total harga di bagian bawah nama
                   subtitle: Column(

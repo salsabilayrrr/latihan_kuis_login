@@ -4,6 +4,16 @@ import 'models/food_item.dart';
 
 class DetailPage extends StatefulWidget {
   final FoodItem foodItem;        // Menerima data makanan yang dipilih
+  //artinya:
+  //FoodItem → tipe datanya, yaitu class FoodItem
+  //foodItem → nama variabel/parameter, ini kita yang menentukan
+  //Jadi bisa saja namanya kamu ubah.
+
+//Huruf kecil foodItem karena itu nama variabel, sedangkan FoodItem huruf besar karena itu nama class. 
+//Ini mengikuti aturan penamaan Dart: nama class biasanya UpperCamelCase, sedangkan variabel lowerCamelCase.
+
+
+
   const DetailPage({super.key, required this.foodItem});
 
   @override
@@ -21,6 +31,9 @@ class _DetailPageState extends State<DetailPage> {
   //menambah variabel untuk tombol beda warna 
   // Variabel untuk melacak index tingkat kepedasan (0: Tidak Pedas, 1: Sedang, 2: Super Pedas)
   int _levelPedasIndex = 0;
+  //bisa aja dihapus nih jadi dari class langusng ke override
+
+
 
   // Daftar warna dan teks keterangan untuk masing-masing tingkat kepedasan
   final List<Color> _warnaLevel = [Colors.green, Colors.orange, Colors.red];

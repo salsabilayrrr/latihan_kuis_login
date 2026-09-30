@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'login.dart';
 
 class ProfilePage extends StatelessWidget {
-  final VoidCallback? onMenuTap; // Fungsi untuk pindah ke tab Menu
+  final VoidCallback? onMenuTap; // Fungsi untuk pindah ke tab Menu kalo emang ad acard terus pindah
 
   final String namaUser; // 👈 1. Tambahkan variabel penangkap nama di sini
   final String username;
@@ -17,6 +17,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //ga ada scaffold ya
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24),
       child: Column(
@@ -33,6 +34,7 @@ class ProfilePage extends StatelessWidget {
 
           const SizedBox(height: 16),
           // 2. Nama Pembuat
+          //ini pake nama 
           Text(
             namaUser,
             style: TextStyle(
@@ -45,7 +47,7 @@ class ProfilePage extends StatelessWidget {
 
 
         const SizedBox(height: 4),
-
+        //ini kalo mau pake username
           Text(
             '@$username',
             style: const TextStyle(
@@ -97,6 +99,7 @@ class ProfilePage extends StatelessWidget {
               ),
 
               onTap: onMenuTap,
+              //kalo ga pindah maka onTap: (){}
             ),
           ),
 
