@@ -65,3 +65,25 @@ String formatPrice(int value) {
     (m) => '${m[1]}.',
   );
 }
+
+class User {
+  String username;
+  String password;
+  String nama;
+  String logoUrl;
+
+  User({
+    required this.username, 
+    required this.password, 
+    required this.nama,
+    required this.logoUrl,
+    });
+}
+
+// Data akun tiruan untuk login
+User user1 = User(
+  username: 'salsabila',
+  password: '124240109',
+  nama: 'Salsabila Yufli Ramadhani',
+  logoUrl: 'https://www.upnyk.ac.id/images/logo.png',
+);

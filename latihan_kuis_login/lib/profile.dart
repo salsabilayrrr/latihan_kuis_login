@@ -6,12 +6,13 @@ class ProfilePage extends StatelessWidget {
   final VoidCallback? onMenuTap; // Fungsi untuk pindah ke tab Menu
 
   final String namaUser; // 👈 1. Tambahkan variabel penangkap nama di sini
+  final String username;
 
   const ProfilePage({
     super.key,
     this.onMenuTap,
-
-    required this.namaUser, // 👈 2. Wajibkan parameter ini saat ProfilePage dipanggil
+    required this.namaUser, 
+    required this.username,// 👈 2. Wajibkan parameter ini saat ProfilePage dipanggil
   });
 
   @override
@@ -40,6 +41,25 @@ class ProfilePage extends StatelessWidget {
               letterSpacing: 1.1,
             ),
           ),
+
+
+
+        const SizedBox(height: 4),
+
+          Text(
+            '@$username',
+            style: const TextStyle(
+              fontSize: 14,
+              color: Colors.grey,
+            ),
+          ),
+
+          const SizedBox(height: 4),
+
+
+
+
+
 
           const SizedBox(height: 4),
           //3. Peran
